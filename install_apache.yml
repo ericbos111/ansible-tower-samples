@@ -16,5 +16,5 @@ tasks:
       - src: httpd.conf
         dest: /etc/httpd/httpd.conf
       - src: httpd.vhosts
-        dest: /etc/httpd/httpd.vhosts
+        dest: /etc/httpd/httpd-vhosts.conf
   
