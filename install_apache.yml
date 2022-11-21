@@ -1,27 +1,28 @@
 ---
-hosts: all
-become: true
-tasks:
-  - name: Install Apache
-    yum: 
-      name:
-        - httpd 
-        - httpd-devel
-      state: present
-  - name: Copy configuration
-    copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      owner: root
-      group: root
-      mode: 0644
-    with_items:
-      - src: httpd.conf
-        dest: /etc/httpd/httpd.conf
-      - src: httpd.vhosts
-        dest: /etc/httpd/httpd-vhosts.conf
-  - name: Service state
-    service: 
-      name: httpd
-      state: started
-      enabled: true
+- name: Deploy Apache
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Apache
+      yum: 
+        name:
+          - httpd 
+          - httpd-devel
+        state: present
+    - name: Copy configuration
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - src: httpd.conf
+          dest: /etc/httpd/httpd.conf
+        - src: httpd.vhosts
+          dest: /etc/httpd/httpd-vhosts.conf
+    - name: Service state
+      service: 
+        name: httpd
+        state: started
+        enabled: true
