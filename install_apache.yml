@@ -4,8 +4,9 @@ become: true
 tasks:
   - name: Install Apache
     yum: 
-      - httpd 
-      - httpd-devel
+      name:
+        - httpd 
+        - httpd-devel
       state: present
   - name: Copy configuration
     copy:
