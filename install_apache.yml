@@ -1,12 +1,14 @@
 ---
 hosts: all
+become: true
 tasks:
   - name: Install Apache
     yum: 
       - httpd 
       - httpd-devel
       state: present
-  - copy:
+  - name: Copy configuration
+    copy:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
       owner: root
@@ -17,4 +19,8 @@ tasks:
         dest: /etc/httpd/httpd.conf
       - src: httpd.vhosts
         dest: /etc/httpd/httpd-vhosts.conf
-  
+  - name: Service state
+    service: 
+      name: httpd
+      state: started
+      enabled: true
