@@ -6,4 +6,15 @@ tasks:
       - httpd 
       - httpd-devel
       state: present
+  - copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: root
+      mode: 0644
+    with_items:
+      - src: httpd.conf
+        dest: /etc/httpd/httpd.conf
+      - src: httpd.vhosts
+        dest: /etc/httpd/httpd.vhosts
   
